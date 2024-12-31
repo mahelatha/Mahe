@@ -6,67 +6,48 @@
     <title>Einstein Bot Integration</title>
 </head>
 <body>
-    <h1>Welcome to Our Portals</h1>
+    <h1>Welcome to Our Portal</h1>
     <p>Use the chat button below to interact with our Einstein Bot.</p>
     
-
+    <!-- Einstein Bot Deployment Script -->
     <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
-    
-    <script type='text/javascript'>
-        
-        function getUrlParameter(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name); 
-        }
-
-        
-        var sourceValue = getUrlParameter('source') || 'Website';  
-
-       
-        var initESW = function(gslbBaseURL) {
-            embedded_svc.settings.displayHelpButton = true; 
-            embedded_svc.settings.language = ''; 
-
-            embedded_svc.settings.enabledFeatures = ['LiveAgent'];
-            embedded_svc.settings.entryFeature = 'LiveAgent';
+<script type='text/javascript'>
+	var initESW = function(gslbBaseURL) {
+		embedded_svc.settings.displayHelpButton = true; //Or false
+		embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
 
 
-            embedded_svc.settings.extraPrechatInfo = [{
-                entityFieldMaps: [{
-                    fieldName: "LeadSource",  
-                    label: "Lead Source",
-                    value: sourceValue  // Set the value basel̥ōd on the URL parameter (e.g., 'portal')
-                }]
-            }];
+		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+		embedded_svc.settings.entryFeature = 'LiveAgent';
 
-            embedded_svc.init(
-                'https://maheslcm--crmdev.sandbox.my.salesforce.com',  
-                'https://maheslcm--crmdev.sandbox.my.site.com/test',  
-                gslbBaseURL,
-                '00DC2000001OVbb',  
-                'Chat_Team',  
-                {
-                    baseLiveAgentContentURL: 'https://c.la12s-core1.sfdc-y37hzm.salesforceliveagent.com/content',
-                    deploymentId: '572C2000000Pezx',
-                    buttonId: '573C20000004Sgr',
-                    baseLiveAgentURL: 'https://d.la12s-core1.sfdc-y37hzm.salesforceliveagent.com/chat',
-                    eswLiveAgentDevName: 'Chat_Team',
-                    isOfflineSupportEnabled: false
-                }
-            );
-        };
+		embedded_svc.init(
+			'https://maheslcm--crmdev.sandbox.my.salesforce.com',
+			'	https://maheslcm--crmdev.sandbox.my.site.com/test',
+			gslbBaseURL,
+			'00DC2000001OVbb',
+			'Chat_Team',
+			{
+				baseLiveAgentContentURL: 'https://c.la12s-core1.sfdc-y37hzm.salesforceliveagent.com/content',
+				deploymentId: '572C2000000Pezx',
+				buttonId: '573C20000004Sgr',
+				baseLiveAgentURL: 'https://d.la12s-core1.sfdc-y37hzm.salesforceliveagent.com/chat',
+				eswLiveAgentDevName: 'Chat_Team',
+				isOfflineSupportEnabled: false
+			}
+		);
+	};
 
-        
-        if (!window.embedded_svc) {
-            var s = document.createElement('script');
-            s.setAttribute('src', 'https://maheslcm--crmdev.sandbox.my.salesforce.com/embeddedservice/5.0/esw.min.js');
-            s.onload = function() {
-                initESW(null);
-            };
-            document.body.appendChild(s);
-        } else {
-            initESW('https://service.force.com');
-        }
-    </script>
+	if (!window.embedded_svc) {
+		var s = document.createElement('script');
+		s.setAttribute('src', 'https://maheslcm--crmdev.sandbox.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+		s.onload = function() {
+			initESW(null);
+		};
+		document.body.appendChild(s);
+	} else {
+		initESW('https://service.force.com');
+	}
+</script>
 </body>
 </html>
+
