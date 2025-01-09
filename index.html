@@ -3,50 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Einstein Bot Integration</title>
+    <title>Custom Chat Button with Logo</title>
+    <style>
+        
+        #customChatButton {
+            display: flex;
+            align-items: center;
+            background-color: #000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius:50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            position: fixed;
+            transition: 0.3s ease;
+        }
+
+        #customChatButton img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            border-radius: 50%; 
+        }
+
+        #customChatButton:hover {
+            
+           
+            background-color: #000;
+            box-shadow: 5px 5px 5px #000;
+        }
+    </style>
 </head>
 <body>
     <h1>Welcome to Our Portal</h1>
-    <p>Use the chat button below to interact with our Einstein Bot.</p>
-    
-    <!-- Einstein Bot Deployment Script -->
+    <p>Click the button below to chat with our Einstein Bot.</p>
+
+    <button id="customChatButton" onclick="bootstrapChat()">
+        <img src="https://maheslcm--crmdev--c.sandbox.vf.force.com/resource/1736141338000/AvatarChatlogo?" alt="Mahe Assist Logo" />
+        Hey I’m Mahe Assist
+    </button>
+
+
     <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
-<script type='text/javascript'>
-	var initESW = function(gslbBaseURL) {
-		embedded_svc.settings.displayHelpButton = true; //Or false
-		embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
-		embedded_svc.settings.defaultMinimizedText = 'Hey I’m Mahe Assist'; // Update button label
-		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
-		embedded_svc.settings.entryFeature = 'LiveAgent';
+    <script type='text/javascript'>
+        function bootstrapChat() {
+            embedded_svc.bootstrapEmbeddedService();
+        }
 
-		embedded_svc.init(
-			'https://maheslcm--crmdev.sandbox.my.salesforce.com',
-			'	https://maheslcm--crmdev.sandbox.my.site.com/test',
-			gslbBaseURL,
-			'00DC2000001OVbb',
-			'Chat_Team',
-			{
-				baseLiveAgentContentURL: 'https://c.la12s-core1.sfdc-y37hzm.salesforceliveagent.com/content',
-				deploymentId: '572C2000000Pezx',
-				buttonId: '573C20000004Sgr',
-				baseLiveAgentURL: 'https://d.la12s-core1.sfdc-y37hzm.salesforceliveagent.com/chat',
-				eswLiveAgentDevName: 'Chat_Team',
-				isOfflineSupportEnabled: false
-			}
-		);
-	};
+        var initESW = function(gslbBaseURL) {
+            embedded_svc.settings.displayHelpButton = false; 
+            embedded_svc.settings.language = ''; 
 
-	if (!window.embedded_svc) {
-		var s = document.createElement('script');
-		s.setAttribute('src', 'https://maheslcm--crmdev.sandbox.my.salesforce.com/embeddedservice/5.0/esw.min.js');
-		s.onload = function() {
-			initESW(null);
-		};
-		document.body.appendChild(s);
-	} else {
-		initESW('https://service.force.com');
-	}
-</script>
+            embedded_svc.settings.defaultMinimizedText = 'Hey I’m Mahe Assist'; 
+            embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+            embedded_svc.settings.entryFeature = 'LiveAgent';
+
+            
+            embedded_svc.settings.chatbotAvatarImgURL = 'https://maheslcm--crmdev--c.sandbox.vf.force.com/resource/1736141338000/AvatarChatlogo?';
+            embedded_svc.settings.offlineSupportMinimizedTextImageURL = 'https://maheslcm--crmdev--c.sandbox.vf.force.com/resource/1736141338000/AvatarChatlogo?';
+
+            embedded_svc.init(
+                'https://maheslcm--crmdev.sandbox.my.salesforce.com',
+                'https://maheslcm--crmdev.sandbox.my.site.com/test',
+                gslbBaseURL,
+                '00DC2000001OVbb',
+                'Chat_Team',
+                {
+                    baseLiveAgentContentURL: 'https://c.la12s-core1.sfdc-y37hzm.salesforceliveagent.com/content',
+                    deploymentId: '572C2000000Pezx',
+                    buttonId: '573C20000004Sgr',
+                    baseLiveAgentURL: 'https://d.la12s-core1.sfdc-y37hzm.salesforceliveagent.com/chat',
+                    eswLiveAgentDevName: 'Chat_Team',
+                    isOfflineSupportEnabled: false
+                }
+            );
+        };
+
+        if (!window.embedded_svc) {
+            var s = document.createElement('script');
+            s.setAttribute('src', 'https://maheslcm--crmdev.sandbox.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+            s.onload = function() {
+                initESW(null);
+            };
+            document.body.appendChild(s);
+        } else {
+            initESW('https://service.force.com');
+        }
+    </script>
 </body>
 </html>
-
